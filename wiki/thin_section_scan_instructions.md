@@ -1,0 +1,22 @@
+---
+permalink: "/:basename"
+layout: git-wiki-default
+title: Scanning Thin Sections
+---
+
+### Thin Section Photography Procedures
+1.	Open up the camera program “ToupView.” Make sure that the microscope camera is plugged in to a USB port on your computer. Turn on the microscope. 
+2.	In the ToupView program, select the camera from the camera list (there should only be one). It may take a minute for anything to show on the display.
+3.	Open up the core cut spreadsheet (\\nickel.unr.edu\gbssrl\new_structure\datasets\cores_cuttings\metadata\NBMGCORECUTCOLLECTIONxxxx - use the file that ends with the most recent date. Old versions should be in the old_versions subfolder). Match the Spec No. on the thin section index card to one of the rows in the spreadsheet. Find the INDEX column and create a folder with the same name in \\nickel.unr.edu\gbssrl\datasets\cores_cuttings\scans. Navigate into the folder.
+4.	Carefully remove the thin section from the index card. Wipe it with a microfiber towel to make sure that both sides are clean. Try to hold the edges so as not to get your fingerprints on the glass. 
+5.	Carefully place the section vertically or horizontally under the microscope – use your judgement on which orientation will capture the most surface area. Make sure that the thin section is as centered as possible with the microscope at the lowest power. Adjust the lighting on the microscope if needed – look through the microscope eyepiece and look at the computer screen to try to get the best representation.
+6.	Adjust the white balance in the ToupView application. On the left hand panel, click on “White Balance.” Select an area that encapsulates most of the thin section. Press “White Balance.” This should adjust the on-screen image to be close to the color you see in the microscope. 
+7.	On the left hand side of the ToupView application, look in the “Capture & Resolution” panel. Make sure that “Snap” is set to “2560 x 1922.” Click “Snap.” A new panel will be opened with your photograph. Save this photograph as INDEX_PPL.tiff in TIFF format in the folder that you created in step 3. For example, if your INDEX is XRC000040, your first image should be called XRC000040_PPL.tiff saved in the XRC000040 folder.
+8.	The next step is to take several cross-polarized photographs. In the ToupView software, make sure that you click on the “Video” tab again (should be the first tab). Leave the thin section in the same position as the last photograph. Rotate the bottom of the objective lens housing in a clockwise direction approximately 90 degrees. You may also need to adjust the lighting, which is next to the power button on the left of the microscope. Compare what you see in the eyepiece to what is on screen to get as close of a match as possible.
+9.	Snap another photograph in the current configuration with the cross polarization. Save this photograph as INDEX_CPX_1.tiff.
+10.	Rotate the thin section 45% clockwise. Take another snap and title it INDEX_CPX_2.tiff.
+11.	Reset the microscope by rotating the lens housing back 90 degrees counter-clockwise. 
+12.	To scan the index card using the scanner, ensure that the scanner surface is free of dust and particles. Place the index card carefully in the scanner and make sure that the edges of the card are parallel to the edges of the scanner. Scan the index card in 400 DPI resolution and save the scan as INDEX_INFO.tiff in the same folder as the photographs. Check the saved image - make sure that all of the information on the index card is viewable in the scanned image. Make sure that the index card is completely straight and that the image is cropped precisely to the edges of the cards. 
+13.	To scan the thin section, make sure the section is free of dust. Scan at 400 DPI, save as INDEX_SCAN.tiff in the same folder as the photographs. 
+14.	Check that the information on the index card matches what is in the database. Add all of the minerals listed in the “Const.” section of the index card to the “CONSTITUENTS” column in the spreadsheet. Add any other missing information to the “NOTES” column of the spreadsheet.
+15.	Return the thin section to the scanned card and replace it in its storage box in the order in which it was removed.

@@ -9,7 +9,7 @@ Note: **[]** designates a folder
   - _Access_: Owner of the folder only unless otherwise specified
   - _Size limit_: 30Gb per user. Please see below for other free storage solutions provided by UNR if your amount of personal data exceeds this limit.
   - _Description_: Your user folder should be in the form of first initial and last name, all lowercase and no spaces
-    - g. Emily ODean would be [eodean]
+    - e.g. Emily ODean would be [eodean]
 - **[programs]** - contains program-based folders that include active data and projects.
   - _Access_: top level folder accessible by all. Access restrictions on subfolders.
   - _Description_: Projects and data in these folders should be actively in-use. Projects don&#39;t necessarily need to be actively being worked on by more than one user at a time – this is just a space for any NBMG projects that benefit from having shared visibility.

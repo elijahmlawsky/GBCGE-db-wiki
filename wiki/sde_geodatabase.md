@@ -7,7 +7,7 @@ layout: git-wiki-default
 ## Getting started with enterprise geodatabases at NBMG
 We now have a server that will be hosting all collaborative databases. This will look and feel fairly similar to file geodatabases with a few key differences.
 
-### Some quick notes on restrictions on enterprise Geodatabases
+### Restrictions on enterprise Geodatabases
 There are a few things that you cannot do with enterprise geodatabases.
 * Cannot change geodatabase name after creation
 * Geodatabase name must be unique among all enterprise database instances on a server
@@ -15,15 +15,17 @@ There are a few things that you cannot do with enterprise geodatabases.
   - Names of: databases, schemas, users, tables, indexes, columns
   - User data (attributes) can be in any case
 
-You cannot do the following with _versioned_ data
-* Create a topology.
+You cannot do the following with _versioned_ data (see [Register and unregister data as versioned](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/a-quick-tour-of-registering-and-unregistering-data-as-versioned.htm) for more information)
+* Create a topology. (create it beforehand)
 * Create a geometric network.
 * Add or remove a feature class from a geometric network.
 *	Create a network dataset.
 * Add or remove a feature class from a network dataset or make other schema changes.
 * Rasters cannot be versioned.
 
-See Esri's ["An Overview of Versioning"](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/an-overview-of-versioning.htm) for more information.
+See Esri's [An Overview of Versioning](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/an-overview-of-versioning.htm) for more information.
+
+## Setup
 
 ### Creating a new enterprise geodatabase
 The database administrator must create the enterprise geodatabase. In order to request a new geodatabase, email eodean@unr.edu with the following information -
@@ -51,11 +53,13 @@ gis - full permissions EXCEPT create and delete databases
 editor - may edit data but may not add or delete data
 viewer - may view data only
 
-### Versioning workflows
-A great example of a versioning workflow –
-http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/version-creation-and-permissions-example.htm
+When adding datasets and granting permissions to others to read/write to it (see [adding data](#adding-data) section), you may add based on role rather than individual users.
 
-### Adding data
+## Versioning workflows
+
+[A great example of a versioning workflow](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/version-creation-and-permissions-example.htm)
+
+<h3 id="adding-data">Adding data</h3>
 You can copy data from a file geodatabase to an enterprise geodatabase using copy and paste. You can also create datasets from scratch in the same way that you create them in file geodatabases.
 
 After adding a dataset to an enterprise geodatabase, **you must grant other users access to view and edit the data**. Right click on the dataset, then click Manage, then Privileges.
@@ -63,12 +67,14 @@ After adding a dataset to an enterprise geodatabase, **you must grant other user
 Make sure you add ALL privileges to the "gis" role, unless you only want certain users to access the data. All faculty and staff users inherit privileges from the gis role. The two other roles, viewer and editor may be used to restrict access.
 
 ### Register a dataset as versioned
-Each feature class and dataset in the enterprise gdb needs to be explicitly registered as versioned. Right click on the dataset, point to “Manage,” and click “Register as Versioned.” Only the person who added/created the dataset can register it as versioned. If you are adding data to an enterprise geodatabase and want others to be able to collaborate, go through this step immediately after creating the data.
+Each feature class and dataset in the enterprise gdb needs to be explicitly registered as versioned. Right click on the dataset, point to “Manage,” and click “Register as Versioned.” Only the person who added/created the dataset can register it as versioned. If you are adding data to an enterprise geodatabase and want others to be able to collaborate, go through this step immediately after creating the data. Otherwise, read/write locks will be placed on the data while editing, as they are with normal file geodatabase workflows.
+
 There are two different versioning options –
 “Move data to base” if you don’t need to:
 * Edit feature classes that participate in a topology, network dataset, or geometric network.
 * Archive data with the archiving functionality built into the geodatabase.
 *	Make use of geodatabase replication.
+
 “Do not move data to base” if you want to:
 *	Undo and redo edits.
 *	Perform long transaction edits.
@@ -77,8 +83,10 @@ There are two different versioning options –
 *	Use replication.
 *	Place a unique constraint on the base table of a feature class
 
-### Add a version
-http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-versions-and-setting-permissions.htm
+Generally, we will want to select "Do not move data to base."
+
+### Create a version
+See [creating a version](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-versions-and-setting-permissions.htm) for more information.
 1. Open the Version Manager dialog box using one of the following methods:
 1. In the Catalog tree, right-click a connection to the geodatabase, point to Administration, click Administer Geodatabase, then click the Versions tab.
 1. In ArcMap, click the Version Manager button on the Versioning toolbar.
@@ -89,22 +97,57 @@ http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-ver
 1. Type a description of the version.
 1. You can use the version description to provide additional information regarding the version's purpose. The size limit on the description is 62 characters.
 1. Choose the desired access level for the version: Private, Public, or Protected.
-1. Private: Only the owner or the geodatabase administrator may view the version and modify versioned data or the version itself.
-1. Protected: Any user may view the version, but only the owner or the geodatabase administrator may edit datasets in the version or the version itself.
-1. Public: Any user may view the version. Any user who has been granted read/write (update, insert, and delete) permissions on datasets can modify datasets in the version.
+  1. Private: Only the owner or the geodatabase administrator may view the version and modify versioned data or the version itself.
+  1. Protected: Any user may view the version, but only the owner or the geodatabase administrator may edit datasets in the version or the version itself.
+  1. Public: Any user may view the version. Any user who has been granted read/write (update, insert, and delete) permissions on datasets can modify datasets in the version.
 1. Click OK to create the new version.
 
-### Questions and discussion:
-1.	Roles/permission types and who should have each role
+### Merging your edits back into the master version
+After you've completed an edit or an addition, you will want to merge your changes back into the Base version. In order to do this, you will need to first "reconcile" (pull changes from Base into your version), and then "post" (contribute your changes to the upstream version).
 
-ESRI recommends a database admin (Emily), a geodatabase administrator (Carto and Geo?), data owners (Cartography and Geologic mapping), data editors (students) and data viewers (everyone else?). With the current authentication, we will likely need to send Brett individual IP addresses in order to gain any sort of access to the server. I will also need to provision access files for each user.
+#### Reconcile and Post
+It's a good idea to reconcile your version with the upstream versions often to avoid conflicts.
 
+1. Right click on your connection to the database and select "Administer Geodatabase."
+2. Right click on the version that you want to reconcile (this is the version you've been editing) - then click "Reconcile Versions." This will open the Reconcile Versions toolbox and it will be prepopulated with most settings that you need.
+3. Under "Target Version," make sure you have selected the "Base" version, not "DEFAULT."
+4. Under "Edit Versions" make sure to de-select all other versions under "Edit Versions" and only have your version selected.
+5. Choose which type of "Conflict Definition" you need (see tool help for descriptions)
+6. Choose which type of "Conflict Resolution" you need (see tool help for descriptions)
+7. If you are ready to post your changes to the upstream Base version, Click "Post Versions after Reconcile." If you choose this option, you should also click "Abort if Conflicts Detected." You can go through this workflow twice as well - once to reconcile, once to post. If you are done editing your downstream version, click "Delete Versions After Post."
+
+### Offline workflows
+In order to work on a database offline, you will need to use Esri's "distributed workflow" to replicate the enterprise geodatabase to a local file geodatabase. See [understanding distributed data](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/understanding-distributed-data.htm) for more information.
+
+A replica differs from a version in that the entirety of the database is copied and saved locally, whereas a version only saves information that is different from the master version.
+
+#### Before going to the field/going offline
+1. Have the database administrator create an enterprise geodatabase for your project.
+2. Connect to the enterprise geodatabase.
+3. Create a file geodatabase on your computer that you will use to store your local version.
+4. Navigate to the "Create Replica" tool (ArcToolbox > Distributed Geodatabase > Create Replica)
+5. In the "Replica Datasets" box, chose the feature sets to replicate locally. You can make a skeleton feature set if you don't have any data yet.
+6. Under Replica Type, choose "CHECK_OUT" for offline editing in a file geodatabase. With this workflow, you check the data out once, work locally, and once you check your data back in you can no longer synchronize additional edits. See [replication types] (http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/replication-types.htm) for more information.
+  - Note: If you need to be checking in and out data and syncing multiple times during the course of your work, see the section on [offline enterprise multi-sync workflow below](#offline-multi-sync)
+
+
+<h4 id="offline-multi-sync">Offline Enterprise Multi-Sync Databases</h4>
+
+#### In the field
+
+#### Merge offline edits
+
+
+
+
+### Workflow example
 What this would look like:
-1.	Cartography creates the geodatabase and creates the “Default” version of the database.
-2.	Emily adds users and sets permissions on the database.
-3.	The data “owner” loads the data into the database and is responsible for maintaining it.
-4.	The data owner registers the datasets as versioned.
-5.	The geodatabase administrator sets the Default version to “protected,” and then creates a working version called Base to use for edits. Base is set to “public.” All users can view the Default database, but cannot edit it.
+1.	Cartography requests a new enterprise geodatabase
+  - Emily creates the database and database Users
+2.  Cartography adds the skeleton structure to the database, sets the database as versioned
+3.	Carto loads the data into the database and is responsible for maintaining it.
+4.	Carto registers the datasets as versioned.
+5.	Carto sets the Default version to “protected,” and then creates a working version called Base to use for edits. Base is set to “public.” All users can view the Default database, but cannot edit it.
 6.	Editors will create their own versions from the Base version. Only one person should be editing each version at a time.
 7.	The geodatabase administrator will merge changes from other versions back to Base after edits are complete.
 8.	Note: There are two operations in enterprise gdbs related to versioning: Reconciling and Posting. Reconciling involves pulling upstream changes down. For example, if you are editing Base_V1 which you’ve versioned from Base and Base has a change posted to it from another version, you must Reconcile your version with Base to keep up to date. Then, when you are ready to merge Base_V1 into Base, you Post your changes.

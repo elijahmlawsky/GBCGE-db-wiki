@@ -49,9 +49,9 @@ From the catalog pane in ArcMap or ArcCatalog:
 ### Permissions
 You may have different permissions in each enterprise geodatabase. Generally, all faculty and staff will be given complete read/write permissions. There are three "roles" in the database management system from which all users inherit their permissions.
 
-gis - full permissions EXCEPT create and delete databases
-editor - may edit data but may not add or delete data
-viewer - may view data only
+- gis - full permissions EXCEPT create and delete databases
+- editor - may edit data but may not add or delete data
+- viewer - may view data only
 
 When adding datasets and granting permissions to others to read/write to it (see [adding data](#adding-data) section), you may add based on role rather than individual users.
 
@@ -88,18 +88,14 @@ Generally, we will want to select "Do not move data to base."
 ### Create a version
 See [creating a version](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-versions-and-setting-permissions.htm) for more information.
 1. Open the Version Manager dialog box using one of the following methods:
-1. In the Catalog tree, right-click a connection to the geodatabase, point to Administration, click Administer Geodatabase, then click the Versions tab.
-1. In ArcMap, click the Version Manager button on the Versioning toolbar.
+    - In the Catalog tree, right-click a connection to the geodatabase, point to Administration, click Administer Geodatabase, then click the Versions tab (this prefills much of the information for you).
+    - In ArcMap, click the Version Manager button on the Versioning toolbar.
 1. To create a new version, right-click the version from which you want to derive the new version and click New.
-1. The New Version dialog box appears.
-1. Type a name for the new version.
-1. The length of the version name is limited to 62 characters.
-1. Type a description of the version.
-1. You can use the version description to provide additional information regarding the version's purpose. The size limit on the description is 62 characters.
+1. Type a name for the new version. Note that the length of the version name is limited to 62 characters. Type a description of the version. You can use the version description to provide additional information regarding the version's purpose. The size limit on the description is 62 characters.
 1. Choose the desired access level for the version: Private, Public, or Protected.
-  1. Private: Only the owner or the geodatabase administrator may view the version and modify versioned data or the version itself.
-  1. Protected: Any user may view the version, but only the owner or the geodatabase administrator may edit datasets in the version or the version itself.
-  1. Public: Any user may view the version. Any user who has been granted read/write (update, insert, and delete) permissions on datasets can modify datasets in the version.
+  - Private: Only the owner or the geodatabase administrator may view the version and modify versioned data or the version itself.
+  - Protected: Any user may view the version, but only the owner or the geodatabase administrator may edit datasets in the version or the version itself.
+  - Public: Any user may view the version. Any user who has been granted read/write (update, insert, and delete) permissions on datasets can modify datasets in the version.
 1. Click OK to create the new version.
 
 ### Merging your edits back into the master version
@@ -129,46 +125,34 @@ A replica differs from a version in that the entirety of the database is copied 
 5. In the "Replica Datasets" box, chose the feature sets to replicate locally. You can make a skeleton feature set if you don't have any data yet.
 6. Under Replica Type, choose "CHECK_OUT" for offline editing in a file geodatabase. With this workflow, you check the data out once, work locally, and once you check your data back in you can no longer synchronize additional edits. See [replication types] (http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/replication-types.htm) for more information.
   - Note: If you need to be checking in and out data and syncing multiple times during the course of your work, see the section on [offline enterprise multi-sync workflow below](#offline-multi-sync)
+7. Make your offline edits in the replica file geodatabase.
 
+#### Once you're back in service ####
+At this point, you have completed your offline editing and you are ready to check your changes back into the enterprise geodatabase server.
+
+1. Right click on your local replica (your file geodatabase) in which you have been making the changes. Select Distributed Geodatabase > Synchronize changes.
+2. All of the required settings should be prefilled. Geodatabase 1 should be your local geodatabase, the replica to synchronize should be the version that you are synchronizing to, and the replica type should be from Geodatabase 1 to Geodatabase 2.
+3. Press next, and choose how to resolve conflicts if they arise.
+4. Check that your changes have been pushed to the correct version in the enterprise gdb. Then, if you don't need to make any more edits and want to merge your changes with the Base version, go through the procedure of reconciling versions (detailed above).
 
 <h4 id="offline-multi-sync">Offline Enterprise Multi-Sync Databases</h4>
+To take advantage of multi-sync functionality (check in edits multiple times while in the field), you have to create a local enterprise geodatabase to sync to. This requires having SQL Server Express installed on your local computer.
 
-#### In the field
+#### Before going to the field/going offline
+Stay tuned...
 
 #### Merge offline edits
-
-
-
+Stay tuned...
 
 ### Workflow example
-What this would look like:
 1.	Cartography requests a new enterprise geodatabase
   - Emily creates the database and database Users
 2.  Cartography adds the skeleton structure to the database, sets the database as versioned
 3.	Carto loads the data into the database and is responsible for maintaining it.
 4.	Carto registers the datasets as versioned.
 5.	Carto sets the Default version to “protected,” and then creates a working version called Base to use for edits. Base is set to “public.” All users can view the Default database, but cannot edit it.
-6.	Editors will create their own versions from the Base version. Only one person should be editing each version at a time.
-7.	The geodatabase administrator will merge changes from other versions back to Base after edits are complete.
-8.	Note: There are two operations in enterprise gdbs related to versioning: Reconciling and Posting. Reconciling involves pulling upstream changes down. For example, if you are editing Base_V1 which you’ve versioned from Base and Base has a change posted to it from another version, you must Reconcile your version with Base to keep up to date. Then, when you are ready to merge Base_V1 into Base, you Post your changes.
-9.	Conflicts are more likely to arise if multiple people are editing features that are in close proximity.
+6.	Editors will create their own versions from the Base version. Each user/editor should have their own working version.
+7.	Each editor will merge their versions back to Base after edits are complete.
+    - There are two operations in enterprise gdbs related to versioning: Reconciling and Posting. Reconciling involves pulling upstream changes down. For example, if you are editing eodean_base which you’ve versioned from Base and Base has a change posted to it from another version, you must Reconcile your version with Base to keep up to date. Then, when you are ready to merge eodean_base into Base, you Post your changes.
+    - Conflicts are more likely to arise if multiple people are editing features that are in close proximity.
 10.	Once everything has been reconciled and the versions have been deleted, the database admin compresses the gdb. This doesn’t delete all of the versioning lineage, just cleans up unused files.
-
-
-
-
-Versioning workflows
-a.	Clean “Master” copy and working “QA” copy?
-
-12.	Archiving workflows
-a.	When to archive/merge versions
-b.	When to archive an entire gdb
-
-13.	How this will change project file structures
-
-14.	Test project and collaborators on that project
-
-15.	IT considerations
-a.	Looking forward – how many of these do we see hosting at any given time? Size?
-
-Will the database need to be used outside the University? Thinking about authentication here. Most should be able to remote in to a desktop, or use the campus’s generic remote desktop. Is there a case where someone will need to use it on their laptop and will not be able to remote in to a laptop for access? This is pretty much the same use case as nickel – only available on the campus network.

@@ -138,11 +138,7 @@ At this point, you have completed your offline editing and you are ready to chec
 <h4 id="offline-multi-sync">Offline Enterprise Multi-Sync Databases</h4>
 To take advantage of multi-sync functionality (check in edits multiple times while in the field), you have to create a local enterprise geodatabase to sync to. This requires having SQL Server Express installed on your local computer.
 
-#### Before going to the field/going offline
-Stay tuned...
-
-#### Merge offline edits
-Stay tuned...
+Stay tuned for more in this section....
 
 ### Workflow example
 1.	Cartography requests a new enterprise geodatabase

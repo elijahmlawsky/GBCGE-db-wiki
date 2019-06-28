@@ -8,20 +8,20 @@ layout: git-wiki-default
 We now have a server that will be hosting all collaborative databases. This will look and feel fairly similar to file geodatabases with a few key differences.
 
 ### Restrictions on enterprise Geodatabases
-There are a few things that you cannot do with enterprise geodatabases.
-* Cannot change geodatabase name after creation
+* You cannot change geodatabase name after creation
 * Geodatabase name must be unique among all enterprise database instances on a server
 * PostgreSQL in particular does not recognize case for the following
   - Names of: databases, schemas, users, tables, indexes, columns
-  - User data (attributes) can be in any case
 
 You cannot do the following with _versioned_ data (see [Register and unregister data as versioned](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/a-quick-tour-of-registering-and-unregistering-data-as-versioned.htm) for more information)
-* Create a topology. (create it beforehand)
+* Create a topology. (need to create it beforehand)
 * Create a geometric network.
 * Add or remove a feature class from a geometric network.
 *	Create a network dataset.
 * Add or remove a feature class from a network dataset or make other schema changes.
 * Rasters cannot be versioned.
+
+Note that all of these types of data may still exist in an enterprise geodatabase - these are just *versioning* restrictions.
 
 See Esri's [An Overview of Versioning](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/an-overview-of-versioning.htm) for more information.
 
@@ -45,6 +45,8 @@ From the catalog pane in ArcMap or ArcCatalog:
 4. Under “Authentication Type,” choose “Database Authentication”
 5. Enter your username and password given to you by the database administrator. Your username will be the same as your netID, and the dbadmin will assign you a password and send it to you securely. This will be the same password that you will use to log in to all geodatabases that you have permission to access.
 6. Wait a moment until the “Database” field is populated. Choose the appropriate geodatabase to connect to.
+
+Alternatively, the database administrator may securely send you a connection file and instructions to use it.
 
 ### Permissions
 You may have different permissions in each enterprise geodatabase. Generally, all faculty and staff will be given complete read/write permissions. There are three "roles" in the database management system from which all users inherit their permissions.
@@ -83,10 +85,9 @@ There are two different versioning options –
 *	Use replication.
 *	Place a unique constraint on the base table of a feature class
 
-Generally, we will want to select "Do not move data to base."
+Generally, we will want to select "Do not move data to base." [Read more about these topics here](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/a-quick-tour-of-registering-and-unregistering-data-as-versioned.htm)
 
 ### Create a version
-See [creating a version](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-versions-and-setting-permissions.htm) for more information.
 1. Open the Version Manager dialog box using one of the following methods:
     - In the Catalog tree, right-click a connection to the geodatabase, point to Administration, click Administer Geodatabase, then click the Versions tab (this prefills much of the information for you).
     - In ArcMap, click the Version Manager button on the Versioning toolbar.
@@ -97,6 +98,10 @@ See [creating a version](http://desktop.arcgis.com/en/arcmap/latest/manage-data/
   - Protected: Any user may view the version, but only the owner or the geodatabase administrator may edit datasets in the version or the version itself.
   - Public: Any user may view the version. Any user who has been granted read/write (update, insert, and delete) permissions on datasets can modify datasets in the version.
 1. Click OK to create the new version.
+See [creating a version](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/creating-versions-and-setting-permissions.htm) for more information.
+
+### Editing
+[Make sure you are using the correct version while editing](http://desktop.arcgis.com/en/arcmap/10.3/manage-data/geodatabases/changing-versions-in-arcmap.htm). Only one person should edit a version at a time. In general, each user will have at least one version of a geodatabase.
 
 ### Merging your edits back into the master version
 After you've completed an edit or an addition, you will want to merge your changes back into the Base version. In order to do this, you will need to first "reconcile" (pull changes from Base into your version), and then "post" (contribute your changes to the upstream version).
@@ -111,6 +116,8 @@ It's a good idea to reconcile your version with the upstream versions often to a
 5. Choose which type of "Conflict Definition" you need (see tool help for descriptions)
 6. Choose which type of "Conflict Resolution" you need (see tool help for descriptions)
 7. If you are ready to post your changes to the upstream Base version, Click "Post Versions after Reconcile." If you choose this option, you should also click "Abort if Conflicts Detected." You can go through this workflow twice as well - once to reconcile, once to post. If you are done editing your downstream version, click "Delete Versions After Post."
+
+[More information on reconcile and post can be found here.](http://desktop.arcgis.com/en/arcmap/10.6/manage-data/geodatabases/a-quick-tour-of-reconciling-a-version.htm)
 
 ### Offline workflows
 In order to work on a database offline, you will need to use Esri's "distributed workflow" to replicate the enterprise geodatabase to a local file geodatabase. See [understanding distributed data](http://desktop.arcgis.com/en/arcmap/latest/manage-data/geodatabases/understanding-distributed-data.htm) for more information.

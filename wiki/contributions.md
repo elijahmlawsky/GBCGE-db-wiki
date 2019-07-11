@@ -13,7 +13,14 @@ layout: git-wiki-default
 
 If you want to contribute but do not want to make a github account, you can send text that you want included in the wiki to eodean@unr.edu.
 
-### How to add and edit content (after creating a github account)
+### How to edit content
+1. From the page that you wish to edit, click "Edit" in the top right corner.
+2. Edit the page in markdown. You can also click the "preview changes" tab to see how your page will look before committing your changes.
+3. Once you are finished, add a title and a description of your changes. (e.g. title - "editing wiki". description - "removed text about editing a wiki from the 'add content' section, created a new 'edit content' section")
+4. Make sure "Commit directly to the `master` branch" is selected.
+5. Press the green "Commit changes" button.
+
+### How to add content (after creating a github account)
 1. Go to nbmg-unr.github.io
 2. Click "Add new post."
 3. This will take you to an editor window on github. Add a file name at the top of the post (no spaces, ex. "test_post.md"). All names must end with the "md" description.

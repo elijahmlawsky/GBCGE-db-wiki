@@ -7,7 +7,7 @@ title: Mining District File Metadata Entry and Scanning
 ## Mining district files
 
 ### Metadata entry
-Use the online form [here]()
+See the documentation folder on the GBSSRL drive for detailed instructions.
 
 ### Scanning
 

@@ -24,7 +24,7 @@ NBMG will make every effort to ensure that all websites are 100% compliant. We w
 ### Images
 NBMG will add meaningful and descriptive alternative text to all images hosted online.
 
-### PDF
+### PDFs
 NBMG has tens of thousands of historic scanned documents hosted on the web for public consumption. These are generally scanned as high DPI tiffs, and then converted to a lower resolution PDF and served online. These are accessible through interactive web applications or through text search.
 
 Every effort will be made to create accessible content when possible. Content will be reviewed and divided into groups for processing.
@@ -50,4 +50,8 @@ There seems to be no great way, at this moment in time, for visually impaired an
 - Present the data: Most maps you can create on ESRI, StoryMapsJS, CartoDB, etc. have an accompany set of tabular data you can view and alter. Presenting that data, as an alternative to viewing that map, can be helpful.
 - Title and description: Always include an accompanying title, and description of the map that details the findings, and how it is laid out.
 - Audio description: Think about adding an audio description of the map for users. Just like in a text-based description, tell the user about the layout of the map, its purpose, and findings.
-[Source: Carnegie Museums](http://web-accessibility.carnegiemuseums.org/content/maps/)
+- Non-mouse users: Make sure that keyboard controls can be used to access interactive information in the application
+
+Esri has made an effort to make all of their web applications ADA accessible. For more information, see [Esri's page on accessibility support](https://doc.arcgis.com/en/web-appbuilder/create-apps/accessibility-support.htm) and [Esri's blog on accessibility](https://www.esri.com/arcgis-blog/products/web-appbuilder/sharing-collaboration/how-accessibility-features-work-in-web-appbuilder-apps/).
+
+Some information here is taken from [Carnegie Museum's Web Accessibility Standards](http://web-accessibility.carnegiemuseums.org/content/maps/)

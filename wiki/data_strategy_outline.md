@@ -1,5 +1,6 @@
-### Data management goals at NBMG
-
+# Data management goals at NBMG
+---
+## Principles
 Our data management strategy will ensure that data are:
 
 **High-quality**
@@ -43,7 +44,6 @@ Our data management strategy will ensure that data are:
 
 -   Structurally and semantically interoperable with industry standards
 
----
 Data management practices should promote:
 
 **Maintainability**
@@ -69,3 +69,45 @@ Data management practices should promote:
     depending on data IO
 
 -   In-house server uptime for file shares is a priority
+
+## Types of Data
+### Tabular
+Quick reference:
+- Tabular data should be stored in a relational format whenever possible, and preferably in a relational database management system
+- Column names should be descriptive
+-	File names should be descriptive and include a date
+-	Data should favor row-wise additions rather than adding columns
+-	Data should be stored in non-proprietary formats for longevity and accessibility
+
+Reference: [National Center for Ecological Analysis and Synthesis Data Management Primer](https://www.nceas.ucsb.edu/files/0012-9623-90%252E2%252E205.pdf)
+
+Long term data should be stored in a relational database management system. Research data should be stored in the appropriate location on the NBMG file system (see outline here: https://nbmg-unr.github.io/file_system.html). The data on the file system may eventually be integrated into the relational system, so be sure to store data in the correct location for discoverability.  
+
+### GIS Data
+NBMG currently uses the following folder structure for mapping projects, which encompasses any data that are used in the map (geodatabase, images, layers, shapefiles), documentation and metadata associated with the project, and
+
+- publication number
+  - data
+    - geodatabase (Contains the ESRI geodatabase files for the map)
+    - images (Contains different types of images)
+        - georeferenced (Georeferenced map that was converted to GIS)
+        - original (Contains the original map)
+    - Layers (ESRI ArcGIS layer files of each layer in the table of contents of the ArcMap MXD file)
+    - shapefiles (ESRI shape files for each layer in the ArcMap table of contents of the ArcMap MXD file)
+  - docs (contains the text document to accompany map)
+    - metadata (contains the metadata as a text file (.txt)for:
+      - Geodatabase
+      - FeatureDataSet
+      - Each FeatureClass in the Geology FeatureDataSet
+  - maps (contains the final ESRI ArcGIS 10.3.1 ArcMap MXD file)
+  - pdfs (contains the final PDF files of the map plates, text, original map, mxd)
+
+The following geodatabase structure is the NBMG standard for organizing geologic features.
+
+![](media/nbmggeodatabasestruct.jpg)
+
+NBMG is mandated be partially compliant with USGS’s geologic map schema (GeMS) by 2020, and must fully adopt the schema by StateMap deliverables in 2022.
+
+![](media/gemsgeodatabasestruct.jpg)
+
+The GeMS schema is more complex than NBMG’s model, but is to be used as a publication or archival format for the database only, agnostic of visual presentation. Thus, NBMG’s long term plan is to develop a toolbox and workflows to convert NBMG’s geodatabase schema to the GeMS schema after the mapmaking process is complete.

@@ -3,9 +3,9 @@ redirect_from: "/"
 ---
 
 
-<div style="background-color: #e6e6e6 ; padding: 10px; border: 0px; border-radius:5px;">
+<div style="background-color: #e7f2ff ; padding: 10px; border: 0px; border-radius:5px;">
 <h4 style="align: center">News and Updates</h4>
-<span style="color: gray"> Please take a look at the <a href="{{ '/file_system.html' | relative_url }}">Nickel Reorganization</a> page. There are actions for all Nickel users to complete before June 30.</span>
+<span style="color: black"> Please take a look at the <a href="{{ '/file_system.html' | relative_url }}">Nickel Reorganization</a> page. There are actions for all Nickel users to complete before January 30, 2020.</span>
 </div>
 
 <br/>

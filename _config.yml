@@ -1,6 +1,6 @@
 # (string) Title of your wiki
-title: "  "
-description: A wiki to house documentation relevant to NBMG and GBSSRL
+title: GBCGE Subsurface Database Wiki
+description: A wiki to house documentation relevant to the GBCGE Subsurface Database
 show_downloads: false
 show_wiki_pages: true
 show_wiki_pages_limit: 5
@@ -9,7 +9,7 @@ paginate_path: "/blog/page:num"
 blog_feature: true
 show_wiki_posts: true
 show_wiki_posts_limit: 5
-logo_url: http://www.nbmg.unr.edu/_images/logos/NBMGlogo_NoText.png
+logo_url: https://gbcge.org/wp-content/uploads/2017/12/gbcge-feature-logomark.jpg
 google_analytics:
 git_branch: master
 theme:
